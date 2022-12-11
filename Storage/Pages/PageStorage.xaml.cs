@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Storage.AppData;
+using Storage.Pages;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,13 +20,17 @@ using System.Windows.Shapes;
 namespace Storage.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Page1.xaml
+    /// Логика взаимодействия для PageStorage.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class PageStorage : Page
     {
-        public Page1()
+        public PageStorage()
         {
             InitializeComponent();
+            var Storage = ConnectOdb.conObj.Storage.ToList();
+            SDiewTours.ItemsSource = Storage;
+
+
         }
     }
 }

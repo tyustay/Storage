@@ -1,0 +1,51 @@
+﻿<Page x:Class="Storage.Pages.PageStorage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Storage.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageStorage">
+
+    <Grid>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" ></RowDefinition>
+                <RowDefinition Height="*" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="1" Name="SDiewTours">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin ="10" Width="800">
+
+                            <StackPanel>
+                                <TextBlock  FontSize="20" >
+                                <Run Text="Номер Склада: "/>
+                                <Run Text="{Binding ID_Storage}"/>
+                                </TextBlock>
+                                <TextBlock FontSize ="20" >
+                                <Run Text="Название Адреса"/>
+                                <Run Text ="{Binding Adress}"/>
+                                </TextBlock>
+                                <TextBlock   FontSize="20" >
+                                <Run Text="Тип Материала"/>
+                                <Run Text ="{Binding Type_Materials.name}"/>
+                                </TextBlock>
+
+                                <TextBlock FontSize="20" >
+                                <Run Text= "Растояние до обласного центра "/>
+                                <Run Text ="{Binding Distance_to_the_regional_center }"/>
+
+                                </TextBlock>
+                            </StackPanel>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+    </Grid>
+</Page>

@@ -14,7 +14,7 @@
         <StackPanel Grid.Row="0" Background="#FFE1E4FF" Orientation="Horizontal">
             <Image Source="/282.png" Width="55"
          HorizontalAlignment="Left" Margin="10 0 0 0 "/>
-            <Button x:Name="btnBack" Click="BtnBack_Click"
+            <Button x:Name="btnMaterials" Click="BtnMaterials_Click"
              Width="150" Height="30" FontSize="17"
              Foreground="White" Background="DarkBlue"
              Margin="500 0 0 0 " FontFamily="Tahoma">Материалы</Button>

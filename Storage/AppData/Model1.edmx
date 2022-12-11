@@ -5,15 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище tern3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "tern3.dbo.Materials" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="Materials">
           <Key>
             <PropertyRef Name="Numder" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Unit_of_measurement" />
-            <PropertyRef Name="Remains" />
-            <PropertyRef Name="Storage" />
           </Key>
           <Property Name="Numder" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -91,19 +85,11 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище tern3ModelContainer">
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type_Material" EntityType="Self.Type_Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit_of_measurement" EntityType="Self.Unit_of_measurement" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Materials" EntityType="Self.Materials" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Materials].[Numder] AS [Numder], 
-    [Materials].[Name] AS [Name], 
-    [Materials].[Unit_of_measurement] AS [Unit_of_measurement], 
-    [Materials].[Remains] AS [Remains], 
-    [Materials].[Storage] AS [Storage]
-    FROM [dbo].[Materials] AS [Materials]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Materials_Storage" Association="Self.FK_Materials_Storage">
             <End Role="Storage" EntitySet="Storage" />
             <End Role="Materials" EntitySet="Materials" />
@@ -122,6 +108,18 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tern3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="Numder" />
+          </Key>
+          <Property Name="Numder" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Unit_of_measurement" Type="Int32" Nullable="false" />
+          <Property Name="Remains" Type="Int32" Nullable="false" />
+          <Property Name="Storage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Storage1" Relationship="Self.FK_Materials_Storage" FromRole="Materials" ToRole="Storage" />
+          <NavigationProperty Name="Unit_of_measurement1" Relationship="Self.FK_Materials_Unit_of_measurement" FromRole="Materials" ToRole="Unit_of_measurement" />
+        </EntityType>
         <EntityType Name="Storage">
           <Key>
             <PropertyRef Name="ID_Sklad" />
@@ -159,22 +157,6 @@
           <Property Name="Unit_of_measurement1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Materials" Relationship="Self.FK_Materials_Unit_of_measurement" FromRole="Unit_of_measurement" ToRole="Materials" />
         </EntityType>
-        <EntityType Name="Materials">
-          <Key>
-            <PropertyRef Name="Numder" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Unit_of_measurement" />
-            <PropertyRef Name="Remains" />
-            <PropertyRef Name="Storage" />
-          </Key>
-          <Property Name="Numder" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Unit_of_measurement" Type="Int32" Nullable="false" />
-          <Property Name="Remains" Type="Int32" Nullable="false" />
-          <Property Name="Storage" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Storage1" Relationship="Self.FK_Materials_Storage" FromRole="Materials" ToRole="Storage" />
-          <NavigationProperty Name="Unit_of_measurement1" Relationship="Self.FK_Materials_Unit_of_measurement" FromRole="Materials" ToRole="Unit_of_measurement" />
-        </EntityType>
         <Association Name="FK_Materials_Storage">
           <End Role="Storage" Type="Self.Storage" Multiplicity="1" />
           <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
@@ -184,18 +166,6 @@
             </Principal>
             <Dependent Role="Materials">
               <PropertyRef Name="Storage" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Storage_Type_Material">
-          <End Role="Type_Material" Type="Self.Type_Material" Multiplicity="1" />
-          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type_Material">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Storage">
-              <PropertyRef Name="Type_Materials" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -211,23 +181,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="tern3Entities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Storage_Type_Material">
+          <End Role="Type_Material" Type="Self.Type_Material" Multiplicity="1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="Type_Materials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tern3Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Materials" EntityType="Self.Materials" />
           <EntitySet Name="Storage" EntityType="Self.Storage" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type_Material" EntityType="Self.Type_Material" />
           <EntitySet Name="Unit_of_measurement" EntityType="Self.Unit_of_measurement" />
-          <EntitySet Name="Materials" EntityType="Self.Materials" />
           <AssociationSet Name="FK_Materials_Storage" Association="Self.FK_Materials_Storage">
             <End Role="Storage" EntitySet="Storage" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_Unit_of_measurement" Association="Self.FK_Materials_Unit_of_measurement">
+            <End Role="Unit_of_measurement" EntitySet="Unit_of_measurement" />
             <End Role="Materials" EntitySet="Materials" />
           </AssociationSet>
           <AssociationSet Name="FK_Storage_Type_Material" Association="Self.FK_Storage_Type_Material">
             <End Role="Type_Material" EntitySet="Type_Material" />
             <End Role="Storage" EntitySet="Storage" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Materials_Unit_of_measurement" Association="Self.FK_Materials_Unit_of_measurement">
-            <End Role="Unit_of_measurement" EntitySet="Unit_of_measurement" />
-            <End Role="Materials" EntitySet="Materials" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -235,7 +217,18 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище tern3ModelContainer" CdmEntityContainer="tern3Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище tern3ModelContainer" CdmEntityContainer="tern3Entities1">
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="tern3Model.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="Numder" ColumnName="Numder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Unit_of_measurement" ColumnName="Unit_of_measurement" />
+                <ScalarProperty Name="Remains" ColumnName="Remains" />
+                <ScalarProperty Name="Storage" ColumnName="Storage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Storage">
             <EntityTypeMapping TypeName="tern3Model.Storage">
               <MappingFragment StoreEntitySet="Storage">
@@ -270,17 +263,6 @@
               <MappingFragment StoreEntitySet="Unit_of_measurement">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Unit_of_measurement1" ColumnName="Unit_of_measurement" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Materials">
-            <EntityTypeMapping TypeName="tern3Model.Materials">
-              <MappingFragment StoreEntitySet="Materials">
-                <ScalarProperty Name="Numder" ColumnName="Numder" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Unit_of_measurement" ColumnName="Unit_of_measurement" />
-                <ScalarProperty Name="Remains" ColumnName="Remains" />
-                <ScalarProperty Name="Storage" ColumnName="Storage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

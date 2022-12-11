@@ -22,20 +22,20 @@ namespace Storage
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Frame MainFrame;
         public MainWindow()
         {
             InitializeComponent();
-            ConnectOdb.conObj =  new tern3Entities();
-            FrameObj.frameMain = frmMain;
-            frmMain.Content = new Page1();
+         
         }
         private void BtnStorage_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new Pages.PageStorage();
         }
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
+       
+        private void BtnMaterials_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new Pages.MaterialsPage();
         }
     }
 }

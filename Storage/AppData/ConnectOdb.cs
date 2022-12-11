@@ -9,6 +9,6 @@ namespace Storage.AppData
     internal class ConnectOdb
     {
 
-        public static tern3Entities conObj;
+        public static tern3Entities1 conObj;
     }
 }

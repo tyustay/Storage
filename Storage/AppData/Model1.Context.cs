@@ -13,10 +13,10 @@ namespace Storage.AppData
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class tern3Entities : DbContext
+    public partial class tern3Entities1 : DbContext
     {
-        public tern3Entities()
-            : base("name=tern3Entities")
+        public tern3Entities1()
+            : base("name=tern3Entities1")
         {
         }
     
@@ -24,11 +24,16 @@ namespace Storage.AppData
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        internal static object GetContext()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual DbSet<Materials> Materials { get; set; }
         public virtual DbSet<Storage> Storage { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type_Material> Type_Material { get; set; }
         public virtual DbSet<Unit_of_measurement> Unit_of_measurement { get; set; }
-        public virtual DbSet<Materials> Materials { get; set; }
     }
 }
