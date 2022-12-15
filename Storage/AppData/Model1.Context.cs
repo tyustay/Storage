@@ -15,6 +15,15 @@ namespace Storage.AppData
     
     public partial class tern3Entities1 : DbContext
     {
+        public static tern3Entities1 conObj;
+        public static tern3Entities1 GetContext()
+        {
+            if (conObj == null)
+            {
+                conObj = new tern3Entities1();
+            }
+            return conObj;
+        }
         public tern3Entities1()
             : base("name=tern3Entities1")
         {
@@ -25,10 +34,7 @@ namespace Storage.AppData
             throw new UnintentionalCodeFirstException();
         }
 
-        internal static object GetContext()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public virtual DbSet<Materials> Materials { get; set; }
         public virtual DbSet<Storage> Storage { get; set; }

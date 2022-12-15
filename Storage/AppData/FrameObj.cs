@@ -9,6 +9,6 @@ namespace Storage.AppData
 {
     internal class FrameObj
     {
-        public static Frame frameMain;
+        public static Frame FrameMain;
     }
 }

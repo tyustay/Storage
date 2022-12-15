@@ -16,39 +16,39 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Введите номер материала:"
-                  Style="{StaticResource mainTxt}"/>
+                   Width="199"/>
 
                     <TextBox Name="TxtTitle"
-                Style="{StaticResource mainTxtb}" Text="{Binding Number}" TextChanged="TxtTitle_TextChanged"/>
+                 Text="{Binding Number}" TextChanged="TxtTitle_TextChanged"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Введите имя материала:" 
-                        Style="{StaticResource mainTxt}"/>
+                         Width="198"/>
                     <TextBox Name="Txtcost"
-                         Style="{StaticResource mainTxtb}" Text="{Binding Name}"/>
+                          Text="{Binding Name}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Введите ID единицы измерения:" Style="{StaticResource mainTxt}"/>
-                    <ComboBox x:Name="VIDid" Width="200" DisplayMemberPath="Edinica_izmerenia1" Style="{StaticResource mainCombo}" />
+                    <TextBlock Text="Введите ID единицы измерения:" />
+                    <ComboBox x:Name="VIDid" Width="157" DisplayMemberPath="Edinica_izmerenia1"  />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Введитe Остаток :"
-                       Style="{StaticResource mainTxt}"/>
+                       />
                     <TextBox Name="TxtOstatok"
-                         Style="{StaticResource mainTxtb}" Text="{Binding Remains}"/>
+                         Text="{Binding Remains}" Width="486"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Введитe ID склада:"
-                       Style="{StaticResource mainTxt}"/>
-                    <ComboBox Name="NRSklad" Width="200" DisplayMemberPath="Edinica_izmerenia1" Style="{StaticResource mainCombo}" />
+                       />
+                    <ComboBox Name="NRSklad" Width="200" DisplayMemberPath="Edinica_izmerenia1"  />
                 </StackPanel>
-                <Button Name="BtnSave"
+                <Button x:Name="BtnSave"
                     Click="BtnSave_Click"
-                    Style="{StaticResource mainBtn}"
+                    
                     Content="Сохранить"/>
             </StackPanel>
         </Grid>

@@ -26,16 +26,17 @@ namespace Storage
         public MainWindow()
         {
             InitializeComponent();
-         
+            ConnectOdb.conObj = new tern3Entities1();
+            FrameObj.FrameMain = FrmMain;
         }
         private void BtnStorage_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.PageStorage();
+            FrmMain.Content = new Pages.PageStorage();
         }
        
         private void BtnMaterials_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Pages.MaterialsPage();
+            FrmMain.Content = new Pages.MaterialsPage();
         }
     }
 }

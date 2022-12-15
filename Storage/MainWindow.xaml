@@ -29,6 +29,6 @@
             Opacity=".1"
              Width="490"/>
         </StackPanel>
-        <Frame x:Name="frmMain" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="FrmMain" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

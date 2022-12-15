@@ -33,13 +33,13 @@ namespace Storage.Pages
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            MainWindow.MainFrame.Content = new Pages.PageAdd(null);
+            MainWindow.MainFrame.Content = new PageAdd(null);
         }
         private void EditMaterialNavigate(object sender, RoutedEventArgs e)
         {
 
             Materials Select = (sender as Grid).DataContext as Materials;
-            MainWindow.MainFrame.Content = new Pages.PageAdd(Select);
+            MainWindow.MainFrame.Content = new PageAdd(Select);
         }
 
         

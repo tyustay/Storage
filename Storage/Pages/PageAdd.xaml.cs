@@ -24,7 +24,7 @@ namespace Storage.Pages
     {
         private Materials MyMaterial = new Materials();
         private bool isAdd = true;
-        public PageAdd(AppData.Materials selestMaterial)
+        public PageAdd(AppData.Materials SelectMaterial)
         {
             InitializeComponent();
             VIDid.ItemsSource = ConnectOdb.conObj.Unit_of_measurement.ToList();
@@ -38,8 +38,7 @@ namespace Storage.Pages
 
         }
 
-        public object SelectMaterial { get; }
-
+        
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             MyMaterial.Numder = int.Parse(TxtTitle.Text);
@@ -56,6 +55,11 @@ namespace Storage.Pages
         }
 
         private void TxtTitle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
